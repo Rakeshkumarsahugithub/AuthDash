@@ -53,11 +53,7 @@ const LoginForm = ({ onSubmit }) => {
       >
         Sign In
       </Button>
-      <Box sx={{ textAlign: 'right' }}>
-        <Link href="/forgot-password" variant="body2">
-          Forgot password?
-        </Link>
-      </Box>
+      
     </Box>
   );
 };

@@ -1,48 +1,102 @@
-module.exports = (sequelize, Sequelize) => {
-  const User = sequelize.define("user", {
+// models/user.model.js
+module.exports = (sequelize, DataTypes) => {
+  const User = sequelize.define("User", {
     id: {
-      type: Sequelize.INTEGER,
+      type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
     username: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: {
+        msg: 'Username already in use'
+      },
+      validate: {
+        notEmpty: {
+          msg: 'Username cannot be empty'
+        },
+        len: {
+          args: [3, 30],
+          msg: 'Username must be between 3 and 30 characters'
+        }
+      }
     },
     email: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: {
+        msg: 'Email already in use'
+      },
       validate: {
-        isEmail: true
+        isEmail: {
+          msg: 'Please provide a valid email address'
+        },
+        notEmpty: {
+          msg: 'Email cannot be empty'
+        }
       }
     },
     password: {
-      type: Sequelize.STRING,
-      allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'Password cannot be empty'
+        },
+        len: {
+          args: [6, 100],
+          msg: 'Password must be between 6 and 100 characters'
+        }
+      }
     },
     profileImage: {
-      type: Sequelize.STRING,
-      allowNull: true
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        isUrl: {
+          msg: 'Profile image must be a valid URL',
+          args: false
+        }
+      }
     },
     emailVerified: {
-      type: Sequelize.BOOLEAN,
+      type: DataTypes.BOOLEAN,
       defaultValue: false
     },
     verificationToken: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true
     },
     resetPasswordToken: {
-      type: Sequelize.STRING,
+      type: DataTypes.STRING,
       allowNull: true
     },
     resetPasswordExpires: {
-      type: Sequelize.DATE,
+      type: DataTypes.DATE,
       allowNull: true
     }
+  }, {
+    timestamps: true,
+    paranoid: true,
+    defaultScope: {
+      attributes: {
+        exclude: ['password', 'verificationToken', 'resetPasswordToken']
+      }
+    },
+    scopes: {
+      withSensitiveData: {
+        attributes: { include: ['password', 'verificationToken'] }
+      }
+    }
   });
+
+  User.associate = function(models) {
+    User.belongsToMany(models.Role, {
+      through: 'UserRoles',
+      as: 'roles'
+    });
+  };
 
   return User;
 };

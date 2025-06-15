@@ -1,64 +1,63 @@
-# User Authentication System with Admin Dashboard
+# User Authentication System
 
-![Project Screenshot](./screenshot.png)
+A full-stack authentication system with email verification, password reset, JWT authentication, and role-based access control.
 
-A full-stack authentication system with role-based access control, email verification, and comprehensive user management.
+## Features
 
-## Key Features
+### Authentication
+- User registration with email verification
+- Login with JWT tokens
+- Password reset via email
+- Email verification resend
+- Persistent sessions with refresh tokens
 
-### 1. Authentication System
-- **User Registration** with form validation
-- **Email Verification** with secure tokens
-- **Login/Logout** functionality with JWT
-- **Password Reset** via secure email links
-- **Persistent Sessions** using refresh tokens
+### User Management
+- Profile management (update username, email, profile picture)
+- Role-based access control (User, Moderator, Admin)
+- View all users (Admin only)
+- Delete users (Admin only)
 
-### 2. User Management
-- **Profile Management** (update username, email, profile picture)
-- **Role-Based Access Control** (User, Admin)
-- **User Listing** (for admins)
-- **Detailed User Profiles** with activity tracking
+### Security
+- JWT authentication with access & refresh tokens
+- Password hashing with bcrypt
+- CSRF protection
+- Rate limiting
+- Secure HTTP headers
 
-### 3. Security Features
-- **Password Hashing** with bcrypt
-- **CSRF Protection** for forms
-- **Rate Limiting** on auth endpoints
-- **Secure HTTP Headers**
-- **JWT Token Expiration** and renewal
+### Additional Features
+- File uploads for profile pictures
+- Pagination and search for user lists
+- Responsive UI with Material-UI
+- Comprehensive error handling
 
-### 4. Frontend Features
-- **Responsive UI** with Material-UI
-- **Form Validation** with Yup and Formik
-- **Toast Notifications** for user feedback
-- **Protected Routes** based on auth status
-
-### 5. Admin Dashboard
-- **User Management** (view/edit/delete users)
-- **Role Assignment** interface
-- **Activity Logs** monitoring
-- **System Statistics** dashboard
-
-## Technology Stack
+## Tech Stack
 
 ### Frontend
-| Technology | Purpose |
-|------------|---------|
-| React | Frontend framework |
-| React Router | Navigation |
-| Material-UI | UI components |
-| Axios | HTTP requests |
-| React Hook Form + Yup | Form handling and validation |
-| Context API | State management |
-| JWT-decode | Token parsing |
+- React 18
+- React Router 6
+- Material-UI (MUI)
+- Axios for HTTP requests
+- Form validation with react-hook-form and yup
+- Context API for state management
 
 ### Backend
-| Technology | Purpose |
-|------------|---------|
-| Node.js | Runtime environment |
-| Express.js | Web framework |
-| Sequelize | ORM for MySQL |
-| JWT | Authentication tokens |
-| Nodemailer | Email services |
-| Bcrypt | Password hashing |
-| Multer | File uploads |
-| Validator | Input sanitization |
+- Node.js with Express
+- Sequelize ORM
+- MySQL database
+- JWT for authentication
+- Nodemailer for email sending
+- Multer for file uploads
+- Helmet for security headers
+
+### Development Tools
+- Vite for frontend build
+- Nodemon for backend development
+- Postman/Insomnia for API testing
+- Git for version control
+
+## Installation
+
+### Backend Setup
+1. Navigate to the backend directory:
+   ```bash
+   cd backend
